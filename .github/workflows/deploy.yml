@@ -1,0 +1,37 @@
+name: Deploy MPCRP Staff Portal
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
+          publish_branch: gh-pages
+```
+
+**Setup steps:**
+1. In your repo, go to **Settings → Pages**
+2. Set Source to **Deploy from a branch**
+3. Set Branch to **gh-pages** → **/ (root)**
+4. Push any change to `main` and it will auto-deploy
+
+**Your repo structure should look like:**
+```
+/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+├── index.html
+├── mpcrpred.png
+└── mpcrpwhite.png
